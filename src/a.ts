@@ -176,3 +176,41 @@ function filterUsers(users: USERS[]){
 const resutl = filterUsers([{firstName: 'anurag', lastName: "poddar", age: 20}, {firstName: 'shivam', lastName: "sahu", age: 12}, {firstName: 'vivek', lastName: "kumar", age: 18}]);
 
 console.log(resutl);
+
+// type KeyInput = "UP" | "DOWN" | "LEFT" | "RIGHT";
+
+enum Direction {
+  UP,
+  DOWN,
+  RIGHT,
+  LEFT,
+}
+
+function doSomething(keyPreshed: Direction){
+  if(keyPreshed == Direction.UP){
+
+  }
+}
+console.log("------------")
+console.log(doSomething(Direction.UP));
+console.log(doSomething(Direction.DOWN));
+console.log(Direction.UP);
+
+// generics
+type Input = number | string;
+function firstEle<Input>(arr: Input[]): Input{// fixed
+  return arr[0];
+}
+
+const value = firstEle(["anurag", "poddar"]);  //should infered correctly
+const value2 = firstEle(['anurag', 2, 4, 'poddar']); // we dont want this
+console.log(value.toUpperCase());
+
+
+// generic is the solutin to this problem
+function identity<T>(arg: T): T{
+  return arg;
+}
+
+let output1 = identity<string>("hello");
+let output2 = identity<number>(454);
