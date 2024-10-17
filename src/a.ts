@@ -214,3 +214,103 @@ function identity<T>(arg: T): T{
 
 let output1 = identity<string>("hello");
 let output2 = identity<number>(454);
+
+
+// advande ts
+// 1. Pick: lets you pick value form interface or type
+
+interface Person{
+  name: string,
+  age: number,
+  email: string,
+  password: string,
+  id: string,
+}
+
+type UpdatedProp = Pick<Person, 'name' | 'age' | 'password'>
+
+function updateUser(props: UpdatedProp){
+  //db hit
+}
+updateUser({name: 'anurag', age: 20, password:'23242'}); // all are required
+
+//2.Partial
+type OptionalProp = Partial<UpdatedProp>
+function updatedUser2(props: OptionalProp){
+
+}
+
+updatedUser2({})
+
+//3. Readonly
+
+//can not update properties of array and objects
+type Hui = {
+  name: string,
+  age: number,
+}
+
+const usser: Readonly<Hui> = {
+  name: "anurag",
+  age: 34,
+}
+
+// usser.name = "hello"  // wont work
+
+//4. Records and Map
+
+type Userrr = {
+  id: string,
+  username: string,
+}
+
+type Users = {
+  [key: string]: Userrr;
+}
+
+const users: Users = {
+  "ras@1": {
+    id: "ras@1",
+    username: "anurag",
+  },
+  "ras@02": {
+    id: "ras@02",
+    username: "poddar"
+  },
+}
+
+// this is ugly syntax so they created this:
+type UserAge = Record<string, number>;
+
+const userrs: UserAge = {
+  "anurag": 21,
+  "poddar": 20,
+}
+
+//5. Map
+type Dost = {
+  name: string,
+  age: number,
+  email: string,
+}
+
+const dost = new Map<string, Dost>();
+dost.set("ras@01", { name: 'ras', age: 40,  email: "ras@gmail.com" });
+dost.set("sarah@01", { name: "sarah", age: 23, email: "sarah@gmail.com" });
+
+const dost1 = dost.get("ras@01");
+console.log(dost1);
+
+//6. Exclude
+type EventType = 'click' | 'scroll' | 'mousemove';
+type ExcludeEvent = Exclude<EventType, 'click'>;
+
+const handleEvent = (event: ExcludeEvent) => {
+  console.log("Handling event", event);
+}
+
+handleEvent("scroll");
+handleEvent("mousemove");
+handleEvent("click");  // this generate error
+
+//type inference in zod already done 
